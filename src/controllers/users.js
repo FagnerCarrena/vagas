@@ -11,20 +11,12 @@ const getUser = ( req, res ) => {
 
     if(!name){
         return res.status(400).json({mensagem: "O nome do usuário não foi encontrado "})
-    
     }
-    
     const usuarioEncontrado = usuario.find(user => user.name === name)
 
-  
-    
-
-    if(!usuarioEncontrado){
+  if(!usuarioEncontrado){
         return res.status(404).json({mensagem: "Usuário inexistente"})
     }
-    
-   
-    
     return res.send(usuarioEncontrado)
 }
 
@@ -44,32 +36,21 @@ const registerUser =  (req, res) => {
         }
 
         const novoUsuario = {
-            
                 id: ultimoId++,
                 name,
                 job,
-                
-            
-        }
+                }
         usuario.push(novoUsuario)
         return res.status(201).json(novoUsuario);
-
 };
 
 const deleteUser = (req, res) => {
     const {id} = req.params;
-
     const usuarioEncontrado = usuario.find(user => user.id === Number(id))
-
-   
-
-    if(!usuarioEncontrado){
+if(!usuarioEncontrado){
         return res.status(404).json({mensagem: "usuario inexistente"})
     }
-
-   
-  usuario = usuario.filter(use => use.id !== usuarioEncontrado.id)
-
+ usuario = usuario.filter(use => use.id !== usuarioEncontrado.id)
 return res.status(204).json({mensagem:"Usuário excluido com sucesso"});
 
 };
@@ -77,18 +58,12 @@ return res.status(204).json({mensagem:"Usuário excluido com sucesso"});
  const update = (req, res) => {
     const {name, job}= req.body;
     const {id} = req.params;
-
-    if(!name & !job){
-        return res.status(400).json({mensagem: "Informe os dados"})
-        }
-
-        const usuarioEncontrado = usuario.find(user => user.id === Number(id))
-
-        
-
-        if(!usuarioEncontrado){
-            return res.status(404).json({mensagem: "Usuário inexistente"})
-        }
+if(!name & !job){
+     return res.status(400).json({mensagem: "Informe os dados"})
+    }
+const usuarioEncontrado = usuario.find(user => user.id === Number(id))
+if(!usuarioEncontrado){
+            return res.status(404).json({mensagem: "Usuário inexistente"})}
 
         if(name){
           usuarioEncontrado.name = name
@@ -99,15 +74,10 @@ return res.status(204).json({mensagem:"Usuário excluido com sucesso"});
 return res.status(204).send();
 
  }
-
- 
-
 const five = (req, res) => {
     const { name} = req.query;
-
-    if(!name){
+if(!name){
         return res.status(400).json({mensagem: "O nome do usuário não foi encontrado "})
-    
     }
     
     const usuarioEncontrado = usuario.find(user => user.name === name)
@@ -116,15 +86,10 @@ const five = (req, res) => {
        contador++
        console.log(contador)
     }
-     
- 
      if(!usuarioEncontrado){
          return res.status(404).json({mensagem: "Usuário inexistente"})
      }
-     
-    
-     
-     return res.send(` O Usuario foi lido ${contador} vez`)
+      return res.send(` O Usuario foi lido ${contador} vez`)
 }
         
 module.exports = {
